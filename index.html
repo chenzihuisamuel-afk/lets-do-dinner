@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dinner?</title>
+<style>
+body{margin:0;min-height:100vh;font-family:Georgia,serif;background:radial-gradient(circle at top,#2b2415,#050505 60%);color:#fff;display:flex;justify-content:center;align-items:center;text-align:center;overflow:hidden}
+.screen{display:none;padding:30px;max-width:420px;width:100%;animation:fadeUp .6s ease}
+.active{display:block}
+h1{font-size:4rem;color:#f4c96b;margin-bottom:30px}
+h2{color:#f4c96b;margin-bottom:25px}
+button,.card{border:none;border-radius:18px;padding:16px 22px;margin:10px;font-size:1.1rem;cursor:pointer;background:rgba(255,255,255,.12);color:#fff;backdrop-filter:blur(10px);box-shadow:0 0 20px rgba(244,201,107,.15);transition:.25s}
+button:hover,.card:hover{transform:translateY(-3px);box-shadow:0 0 25px rgba(244,201,107,.35)}
+.yes-btn,.lock-btn{background:#f4c96b;color:#111;font-weight:bold;min-width:160px}
+.cards{display:grid;gap:12px}
+.card{width:100%}
+.response{font-size:1.8rem;line-height:1.4;margin-bottom:30px}
+.hearts{position:fixed;inset:0;pointer-events:none;opacity:.18;font-size:24px}
+.heart{position:absolute;animation:float 6s infinite ease-in-out}
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-25px)}}
+</style>
+</head>
+<body>
+<div class="hearts">
+<span class="heart" style="top:15%;left:12%;">❤</span>
+<span class="heart" style="top:25%;right:15%;">❤</span>
+<span class="heart" style="bottom:20%;left:18%;">❤</span>
+<span class="heart" style="bottom:15%;right:20%;">❤</span>
+</div>
+
+<section id="start" class="screen active">
+<h1>Dinner?</h1>
+<button class="yes-btn" onclick="showMenu()">YES</button>
+</section>
+
+<section id="menu" class="screen">
+<h2>What are we eating?</h2>
+<div class="cards">
+<button class="card" onclick="choose('THE BEST CHOICE. 👨‍🍳❤️')">🍳 Your cooking</button>
+<button class="card" onclick="choose('Lets do it! Some sake afterwards? 🍶')">🍣 Japanese</button>
+<button class="card" onclick="choose('Never thought you\'d pick this. 🌶')">🌶 Thai</button>
+<button class="card" onclick="choose('Lets gooo! We haven\'t really had proper Western yet. 🍔')">🍔 Western</button>
+<button class="card" onclick="choose('Can\'t go wrong with comfort food. 😌')">🍗 Chicken Rice</button>
+<button class="card" onclick="choose('YAYYY GOOD CHOICE! 🎉<br><br>We\'ll complain about how full we are afterwards 😂')">🍲 HDL</button>
+<button class="card" onclick="choose('Well... I guess you\'re my main dish. ❤️')">😊 You</button>
+</div>
+</section>
+
+<section id="result" class="screen">
+<div id="responseText" class="response"></div>
+<button class="lock-btn" onclick="confirmDate()">Lock it in ✅</button>
+</section>
+
+<section id="final" class="screen">
+<h2>🎉 Date confirmed.</h2>
+<p>Now all that's left is deciding when.</p>
+</section>
+
+<script>
+function switchScreen(id){
+document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+document.getElementById(id).classList.add('active');
+}
+function showMenu(){switchScreen('menu');}
+function choose(r){document.getElementById('responseText').innerHTML=r;switchScreen('result');}
+function confirmDate(){switchScreen('final');}
+</script>
+</body>
+</html>
