@@ -1,5 +1,15 @@
 let selectedFood = "";
 
+const responses = {
+  "Your cooking": "THE BEST CHOICE. 👨‍🍳❤️",
+  "Japanese": "Lets do it! Some sake afterwards? 🍶",
+  "Thai": "Never thought you'd pick this. 🌶",
+  "Western": "Lets gooo! We haven't really had proper Western yet. 🍔",
+  "Chicken Rice": "Can't go wrong with comfort food. 😌",
+  "HDL": "YAYYY GOOD CHOICE! 🎉<br><br>We'll complain about how full we are afterwards 😂",
+  "You": "Well... I guess you're my main dish. ❤️"
+};
+
 function switchScreen(id) {
   document.querySelectorAll(".screen").forEach(screen => {
     screen.classList.remove("active");
@@ -19,9 +29,9 @@ function showMenu() {
   switchScreen("menu");
 }
 
-function choose(food, response) {
+function choose(food) {
   selectedFood = food;
-  document.getElementById("responseText").innerHTML = response;
+  document.getElementById("responseText").innerHTML = responses[food];
   switchScreen("result");
 }
 
@@ -43,3 +53,14 @@ function confirmDate() {
     switchScreen("final");
   }, 500);
 }
+
+document.getElementById("yesButton").addEventListener("click", showMenu);
+document.getElementById("lockButton").addEventListener("click", confirmDate);
+document.getElementById("tryAgainButton").addEventListener("click", showMenu);
+document.getElementById("backToMenuButton").addEventListener("click", showMenu);
+
+document.querySelectorAll(".card").forEach(card => {
+  card.addEventListener("click", () => {
+    choose(card.dataset.food);
+  });
+});

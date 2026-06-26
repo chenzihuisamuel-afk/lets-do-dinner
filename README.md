@@ -1,3 +1,3 @@
 # Dinner?
 
-Mobile-fixed dinner invitation website with hidden Google Forms response tracking.
+Click-fix version. All buttons now use safe JavaScript event listeners.
