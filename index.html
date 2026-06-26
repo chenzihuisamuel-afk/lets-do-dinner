@@ -15,42 +15,42 @@
     <span class="heart" style="bottom:15%;right:20%;">❤</span>
   </div>
 
-  <section id="start" class="screen active">
-    <h1>Dinner?</h1>
-    <button class="yes-btn" onclick="showMenu()">YES</button>
-  </section>
+  <main class="app">
+    <section id="start" class="screen active">
+      <h1>Dinner?</h1>
+      <button class="yes-btn" onclick="showMenu()">YES</button>
+    </section>
 
-  <section id="menu" class="screen">
-    <h2>What are we eating?</h2>
+    <section id="menu" class="screen">
+      <h2>What are we eating?</h2>
 
-    <div class="cards">
-      <button class="card" onclick="choose('Your cooking','THE BEST CHOICE. 👨‍🍳❤️')">🍳 Your cooking</button>
-      <button class="card" onclick="choose('Japanese','Lets do it! Some sake afterwards? 🍶')">🍣 Japanese</button>
-      <button class="card" onclick="choose('Thai','Never thought you\\'d pick this. 🌶')">🌶 Thai</button>
-      <button class="card" onclick="choose('Western','Lets gooo! We haven\\'t really had proper Western yet. 🍔')">🍔 Western</button>
-      <button class="card" onclick="choose('Chicken Rice','Can\\'t go wrong with comfort food. 😌')">🍗 Chicken Rice</button>
-      <button class="card" onclick="choose('HDL','YAYYY GOOD CHOICE! 🎉<br><br>We\\'ll complain about how full we are afterwards 😂')">🍲 HDL</button>
-      <button class="card" onclick="choose('You','Well... I guess you\\'re my main dish. ❤️')">😊 You</button>
-    </div>
-  </section>
+      <div class="cards">
+        <button class="card" onclick="choose('Your cooking','THE BEST CHOICE. 👨‍🍳❤️')">🍳 Your cooking</button>
+        <button class="card" onclick="choose('Japanese','Lets do it! Some sake afterwards? 🍶')">🍣 Japanese</button>
+        <button class="card" onclick="choose('Thai','Never thought you\\'d pick this. 🌶')">🌶 Thai</button>
+        <button class="card" onclick="choose('Western','Lets gooo! We haven\\'t really had proper Western yet. 🍔')">🍔 Western</button>
+        <button class="card" onclick="choose('Chicken Rice','Can\\'t go wrong with comfort food. 😌')">🍗 Chicken Rice</button>
+        <button class="card" onclick="choose('HDL','YAYYY GOOD CHOICE! 🎉<br><br>We\\'ll complain about how full we are afterwards 😂')">🍲 HDL</button>
+        <button class="card" onclick="choose('You','Well... I guess you\\'re my main dish. ❤️')">😊 You</button>
+      </div>
+    </section>
 
-  <section id="result" class="screen">
-    <div id="responseText" class="response"></div>
-    <button id="lockButton" class="lock-btn" onclick="confirmDate()">Lock it in ✅</button>
-    <button class="back-btn" onclick="showMenu()">Try another option</button>
-    <p id="saveStatus" class="small-note"></p>
-  </section>
+    <section id="result" class="screen">
+      <div id="responseText" class="response"></div>
+      <button id="lockButton" class="lock-btn" onclick="confirmDate()">Lock it in ✅</button>
+      <button class="back-btn" onclick="showMenu()">Try another option</button>
+      <p id="saveStatus" class="small-note"></p>
+    </section>
 
-  <section id="final" class="screen">
-    <h2>🎉 Date confirmed.</h2>
-    <p>See you tonight.</p>
-    <button class="back-btn" onclick="showMenu()">Back to food menu</button>
-  </section>
+    <section id="final" class="screen">
+      <h2>🎉 Date confirmed.</h2>
+      <p>See you tonight.</p>
+      <button class="back-btn" onclick="showMenu()">Back to food menu</button>
+    </section>
+  </main>
 
-  <!-- Hidden iframe prevents Google Forms from redirecting the page -->
   <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
 
-  <!-- Hidden Google Form submission -->
   <form
     id="googleForm"
     action="https://docs.google.com/forms/d/e/1FAIpQLScdxbgmB423wFdzlqV65sKu40q2QL3K4LsvV2XVgbRbmjsgAw/formResponse"
