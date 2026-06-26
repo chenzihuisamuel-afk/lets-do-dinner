@@ -10,9 +10,11 @@ body{margin:0;min-height:100vh;font-family:Georgia,serif;background:radial-gradi
 .active{display:block}
 h1{font-size:4rem;color:#f4c96b;margin-bottom:30px}
 h2{color:#f4c96b;margin-bottom:25px}
+p{font-size:1.35rem;line-height:1.5}
 button,.card{border:none;border-radius:18px;padding:16px 22px;margin:10px;font-size:1.1rem;cursor:pointer;background:rgba(255,255,255,.12);color:#fff;backdrop-filter:blur(10px);box-shadow:0 0 20px rgba(244,201,107,.15);transition:.25s}
 button:hover,.card:hover{transform:translateY(-3px);box-shadow:0 0 25px rgba(244,201,107,.35)}
 .yes-btn,.lock-btn{background:#f4c96b;color:#111;font-weight:bold;min-width:160px}
+.back-btn{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(244,201,107,.35)}
 .cards{display:grid;gap:12px}
 .card{width:100%}
 .response{font-size:1.8rem;line-height:1.4;margin-bottom:30px}
@@ -51,11 +53,13 @@ button:hover,.card:hover{transform:translateY(-3px);box-shadow:0 0 25px rgba(244
 <section id="result" class="screen">
 <div id="responseText" class="response"></div>
 <button class="lock-btn" onclick="confirmDate()">Lock it in ✅</button>
+<button class="back-btn" onclick="showMenu()">Try another option</button>
 </section>
 
 <section id="final" class="screen">
 <h2>🎉 Date confirmed.</h2>
-<p>Now all that's left is deciding when.</p>
+<p>See you tonight.</p>
+<button class="back-btn" onclick="showMenu()">Back to food menu</button>
 </section>
 
 <script>
