@@ -4,7 +4,184 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Dinner?</title>
-  <link rel="stylesheet" href="style.css" />
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      min-height: 100%;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Georgia, serif;
+      background: radial-gradient(circle at top, #2b2415, #050505 60%);
+      color: white;
+      text-align: center;
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+
+    .app {
+      min-height: 100vh;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 28px 18px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .screen {
+      display: none;
+      width: 100%;
+      max-width: 420px;
+      animation: fadeUp 0.6s ease;
+    }
+
+    .screen.active {
+      display: block;
+    }
+
+    h1 {
+      font-size: clamp(3rem, 15vw, 4rem);
+      color: #f4c96b;
+      margin: 0 0 30px;
+    }
+
+    h2 {
+      color: #f4c96b;
+      margin: 0 0 22px;
+    }
+
+    p {
+      font-size: 1.35rem;
+      line-height: 1.5;
+    }
+
+    button {
+      border: none;
+      border-radius: 18px;
+      padding: 16px 18px;
+      margin: 0;
+      font-size: 1.05rem;
+      cursor: pointer;
+      background: rgba(255, 255, 255, 0.12);
+      color: white;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 0 20px rgba(244, 201, 107, 0.15);
+      transition: 0.25s;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+      position: relative;
+      z-index: 5;
+    }
+
+    button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 0 25px rgba(244, 201, 107, 0.35);
+    }
+
+    .yes-btn,
+    .lock-btn {
+      background: #f4c96b;
+      color: #111;
+      font-weight: bold;
+      min-width: 160px;
+      margin: 10px;
+    }
+
+    .lock-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .back-btn {
+      background: rgba(255, 255, 255, 0.12);
+      color: white;
+      border: 1px solid rgba(244, 201, 107, 0.35);
+      margin: 10px;
+    }
+
+    .cards {
+      display: grid;
+      gap: 12px;
+      width: 100%;
+    }
+
+    .card {
+      width: 100%;
+      min-height: 56px;
+    }
+
+    .response {
+      font-size: 1.8rem;
+      line-height: 1.4;
+      margin-bottom: 30px;
+    }
+
+    .small-note {
+      font-size: 0.9rem;
+      opacity: 0.75;
+      margin-top: 10px;
+    }
+
+    .hearts {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.18;
+      font-size: 24px;
+      z-index: 1;
+    }
+
+    .heart {
+      position: absolute;
+      animation: float 6s infinite ease-in-out;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-25px);
+      }
+    }
+
+    @media (max-height: 720px) {
+      .app {
+        align-items: flex-start;
+        padding-top: 32px;
+        padding-bottom: 32px;
+      }
+
+      .cards {
+        gap: 10px;
+      }
+
+      .card {
+        min-height: 50px;
+        padding: 13px 16px;
+      }
+    }
+  </style>
 </head>
 
 <body>
@@ -18,34 +195,34 @@
   <main class="app">
     <section id="start" class="screen active">
       <h1>Dinner?</h1>
-      <button id="yesButton" class="yes-btn">YES</button>
+      <button id="yesButton" class="yes-btn" type="button">YES</button>
     </section>
 
     <section id="menu" class="screen">
       <h2>What are we eating?</h2>
 
       <div class="cards">
-        <button class="card" data-food="Your cooking">🍳 Your cooking</button>
-        <button class="card" data-food="Japanese">🍣 Japanese</button>
-        <button class="card" data-food="Thai">🌶 Thai</button>
-        <button class="card" data-food="Western">🍔 Western</button>
-        <button class="card" data-food="Chicken Rice">🍗 Chicken Rice</button>
-        <button class="card" data-food="HDL">🍲 HDL</button>
-        <button class="card" data-food="You">😊 You</button>
+        <button type="button" class="card" data-food="Your cooking">🍳 Your cooking</button>
+        <button type="button" class="card" data-food="Japanese">🍣 Japanese</button>
+        <button type="button" class="card" data-food="Thai">🌶 Thai</button>
+        <button type="button" class="card" data-food="Western">🍔 Western</button>
+        <button type="button" class="card" data-food="Chicken Rice">🍗 Chicken Rice</button>
+        <button type="button" class="card" data-food="HDL">🍲 HDL</button>
+        <button type="button" class="card" data-food="You">😊 You</button>
       </div>
     </section>
 
     <section id="result" class="screen">
       <div id="responseText" class="response"></div>
-      <button id="lockButton" class="lock-btn">Lock it in ✅</button>
-      <button id="tryAgainButton" class="back-btn">Try another option</button>
+      <button id="lockButton" class="lock-btn" type="button">Lock it in ✅</button>
+      <button id="tryAgainButton" class="back-btn" type="button">Try another option</button>
       <p id="saveStatus" class="small-note"></p>
     </section>
 
     <section id="final" class="screen">
       <h2>🎉 Date confirmed.</h2>
       <p>See you tonight.</p>
-      <button id="backToMenuButton" class="back-btn">Back to food menu</button>
+      <button id="backToMenuButton" class="back-btn" type="button">Back to food menu</button>
     </section>
   </main>
 
@@ -61,6 +238,73 @@
     <input type="hidden" name="entry.241731394" id="foodChoiceInput" />
   </form>
 
-  <script src="script.js"></script>
+  <script>
+    let selectedFood = "";
+
+    const responses = {
+      "Your cooking": "THE BEST CHOICE. 👨‍🍳❤️",
+      "Japanese": "Lets do it! Some sake afterwards? 🍶",
+      "Thai": "Never thought you'd pick this. 🌶",
+      "Western": "Lets gooo! We haven't really had proper Western yet. 🍔",
+      "Chicken Rice": "Can't go wrong with comfort food. 😌",
+      "HDL": "YAYYY GOOD CHOICE! 🎉<br><br>We'll complain about how full we are afterwards 😂",
+      "You": "Well... I guess you're my main dish. ❤️"
+    };
+
+    function switchScreen(id) {
+      document.querySelectorAll(".screen").forEach(function(screen) {
+        screen.classList.remove("active");
+      });
+
+      document.getElementById(id).classList.add("active");
+      window.scrollTo(0, 0);
+    }
+
+    function showMenu() {
+      document.getElementById("saveStatus").textContent = "";
+
+      const lockButton = document.getElementById("lockButton");
+      lockButton.disabled = false;
+      lockButton.textContent = "Lock it in ✅";
+
+      switchScreen("menu");
+    }
+
+    function choose(food) {
+      selectedFood = food;
+      document.getElementById("responseText").innerHTML = responses[food];
+      switchScreen("result");
+    }
+
+    function submitResponse() {
+      document.getElementById("foodChoiceInput").value = selectedFood;
+      document.getElementById("googleForm").submit();
+    }
+
+    function confirmDate() {
+      const lockButton = document.getElementById("lockButton");
+      lockButton.disabled = true;
+      lockButton.textContent = "Saved ❤️";
+
+      document.getElementById("saveStatus").textContent = "Response saved.";
+
+      submitResponse();
+
+      setTimeout(function() {
+        switchScreen("final");
+      }, 500);
+    }
+
+    document.getElementById("yesButton").onclick = showMenu;
+    document.getElementById("lockButton").onclick = confirmDate;
+    document.getElementById("tryAgainButton").onclick = showMenu;
+    document.getElementById("backToMenuButton").onclick = showMenu;
+
+    document.querySelectorAll(".card").forEach(function(card) {
+      card.onclick = function() {
+        choose(card.getAttribute("data-food"));
+      };
+    });
+  </script>
 </body>
 </html>
