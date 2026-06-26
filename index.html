@@ -1,103 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dinner?</title>
-<style>
-body{margin:0;min-height:100vh;font-family:Georgia,serif;background:radial-gradient(circle at top,#2b2415,#050505 60%);color:#fff;display:flex;justify-content:center;align-items:center;text-align:center;overflow:hidden}
-.screen{display:none;padding:30px;max-width:420px;width:100%;animation:fadeUp .6s ease}
-.active{display:block}
-h1{font-size:4rem;color:#f4c96b;margin-bottom:30px}
-h2{color:#f4c96b;margin-bottom:25px}
-p{font-size:1.35rem;line-height:1.5}
-button,.card{border:none;border-radius:18px;padding:16px 22px;margin:10px;font-size:1.1rem;cursor:pointer;background:rgba(255,255,255,.12);color:#fff;backdrop-filter:blur(10px);box-shadow:0 0 20px rgba(244,201,107,.15);transition:.25s}
-button:hover,.card:hover{transform:translateY(-3px);box-shadow:0 0 25px rgba(244,201,107,.35)}
-.yes-btn,.lock-btn{background:#f4c96b;color:#111;font-weight:bold;min-width:160px}
-.back-btn{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(244,201,107,.35)}
-.cards{display:grid;gap:12px}
-.card{width:100%}
-.response{font-size:1.8rem;line-height:1.4;margin-bottom:30px}
-.small-note{font-size:.9rem;opacity:.75;margin-top:10px}
-.hearts{position:fixed;inset:0;pointer-events:none;opacity:.18;font-size:24px}
-.heart{position:absolute;animation:float 6s infinite ease-in-out}
-@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-25px)}}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dinner?</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
-<div class="hearts">
-<span class="heart" style="top:15%;left:12%;">❤</span>
-<span class="heart" style="top:25%;right:15%;">❤</span>
-<span class="heart" style="bottom:20%;left:18%;">❤</span>
-<span class="heart" style="bottom:15%;right:20%;">❤</span>
-</div>
+  <div class="hearts">
+    <span class="heart" style="top:15%;left:12%;">❤</span>
+    <span class="heart" style="top:25%;right:15%;">❤</span>
+    <span class="heart" style="bottom:20%;left:18%;">❤</span>
+    <span class="heart" style="bottom:15%;right:20%;">❤</span>
+  </div>
 
-<section id="start" class="screen active">
-<h1>Dinner?</h1>
-<button class="yes-btn" onclick="showMenu()">YES</button>
-</section>
+  <section id="start" class="screen active">
+    <h1>Dinner?</h1>
+    <button class="yes-btn" onclick="showMenu()">YES</button>
+  </section>
 
-<section id="menu" class="screen">
-<h2>What are we eating?</h2>
-<div class="cards">
-<button class="card" onclick="choose('Your cooking','THE BEST CHOICE. 👨‍🍳❤️')">🍳 Your cooking</button>
-<button class="card" onclick="choose('Japanese','Lets do it! Some sake afterwards? 🍶')">🍣 Japanese</button>
-<button class="card" onclick="choose('Thai','Never thought you\'d pick this. 🌶')">🌶 Thai</button>
-<button class="card" onclick="choose('Western','Lets gooo! We haven\'t really had proper Western yet. 🍔')">🍔 Western</button>
-<button class="card" onclick="choose('Chicken Rice','Can\'t go wrong with comfort food. 😌')">🍗 Chicken Rice</button>
-<button class="card" onclick="choose('HDL','YAYYY GOOD CHOICE! 🎉<br><br>We\'ll complain about how full we are afterwards 😂')">🍲 HDL</button>
-<button class="card" onclick="choose('You','Well... I guess you\'re my main dish. ❤️')">😊 You</button>
-</div>
-</section>
+  <section id="menu" class="screen">
+    <h2>What are we eating?</h2>
 
-<section id="result" class="screen">
-<div id="responseText" class="response"></div>
-<button class="lock-btn" onclick="confirmDate()">Lock it in ✅</button>
-<button class="back-btn" onclick="showMenu()">Try another option</button>
-<p class="small-note" id="saveStatus"></p>
-</section>
+    <div class="cards">
+      <button class="card" onclick="choose('Your cooking','THE BEST CHOICE. 👨‍🍳❤️')">🍳 Your cooking</button>
+      <button class="card" onclick="choose('Japanese','Lets do it! Some sake afterwards? 🍶')">🍣 Japanese</button>
+      <button class="card" onclick="choose('Thai','Never thought you\\'d pick this. 🌶')">🌶 Thai</button>
+      <button class="card" onclick="choose('Western','Lets gooo! We haven\\'t really had proper Western yet. 🍔')">🍔 Western</button>
+      <button class="card" onclick="choose('Chicken Rice','Can\\'t go wrong with comfort food. 😌')">🍗 Chicken Rice</button>
+      <button class="card" onclick="choose('HDL','YAYYY GOOD CHOICE! 🎉<br><br>We\\'ll complain about how full we are afterwards 😂')">🍲 HDL</button>
+      <button class="card" onclick="choose('You','Well... I guess you\\'re my main dish. ❤️')">😊 You</button>
+    </div>
+  </section>
 
-<section id="final" class="screen">
-<h2>🎉 Date confirmed.</h2>
-<p>See you tonight.</p>
-<button class="back-btn" onclick="showMenu()">Back to food menu</button>
-</section>
+  <section id="result" class="screen">
+    <div id="responseText" class="response"></div>
+    <button id="lockButton" class="lock-btn" onclick="confirmDate()">Lock it in ✅</button>
+    <button class="back-btn" onclick="showMenu()">Try another option</button>
+    <p id="saveStatus" class="small-note"></p>
+  </section>
 
-<script>
-let selectedFood = "";
+  <section id="final" class="screen">
+    <h2>🎉 Date confirmed.</h2>
+    <p>See you tonight.</p>
+    <button class="back-btn" onclick="showMenu()">Back to food menu</button>
+  </section>
 
-function switchScreen(id){
-  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-}
+  <!-- Hidden iframe prevents Google Forms from redirecting the page -->
+  <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
 
-function showMenu(){
-  document.getElementById('saveStatus').textContent = "";
-  switchScreen('menu');
-}
+  <!-- Hidden Google Form submission -->
+  <form
+    id="googleForm"
+    action="https://docs.google.com/forms/d/e/1FAIpQLScdxbgmB423wFdzlqV65sKu40q2QL3K4LsvV2XVgbRbmjsgAw/formResponse"
+    method="POST"
+    target="hidden_iframe"
+    style="display:none;"
+  >
+    <input type="hidden" name="entry.241731394" id="foodChoiceInput" />
+  </form>
 
-function choose(food, response){
-  selectedFood = food;
-  document.getElementById('responseText').innerHTML = response;
-  switchScreen('result');
-}
-
-function submitResponse(){
-  const formData = new FormData();
-  formData.append("entry.241731394", selectedFood);
-
-  fetch("https://docs.google.com/forms/d/e/1FAIpQLScdxbgmB423wFdzlqV65sKu40q2QL3K4LsvV2XVgbRbmjsgAw/formResponse", {
-    method: "POST",
-    mode: "no-cors",
-    body: formData
-  });
-}
-
-function confirmDate(){
-  submitResponse();
-  switchScreen('final');
-}
-</script>
+  <script src="script.js"></script>
 </body>
 </html>
