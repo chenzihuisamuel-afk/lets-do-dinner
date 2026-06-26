@@ -18,6 +18,7 @@ button:hover,.card:hover{transform:translateY(-3px);box-shadow:0 0 25px rgba(244
 .cards{display:grid;gap:12px}
 .card{width:100%}
 .response{font-size:1.8rem;line-height:1.4;margin-bottom:30px}
+.small-note{font-size:.9rem;opacity:.75;margin-top:10px}
 .hearts{position:fixed;inset:0;pointer-events:none;opacity:.18;font-size:24px}
 .heart{position:absolute;animation:float 6s infinite ease-in-out}
 @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
@@ -40,13 +41,13 @@ button:hover,.card:hover{transform:translateY(-3px);box-shadow:0 0 25px rgba(244
 <section id="menu" class="screen">
 <h2>What are we eating?</h2>
 <div class="cards">
-<button class="card" onclick="choose('THE BEST CHOICE. 👨‍🍳❤️')">🍳 Your cooking</button>
-<button class="card" onclick="choose('Lets do it! Some sake afterwards? 🍶')">🍣 Japanese</button>
-<button class="card" onclick="choose('Never thought you\'d pick this. 🌶')">🌶 Thai</button>
-<button class="card" onclick="choose('Lets gooo! We haven\'t really had proper Western yet. 🍔')">🍔 Western</button>
-<button class="card" onclick="choose('Can\'t go wrong with comfort food. 😌')">🍗 Chicken Rice</button>
-<button class="card" onclick="choose('YAYYY GOOD CHOICE! 🎉<br><br>We\'ll complain about how full we are afterwards 😂')">🍲 HDL</button>
-<button class="card" onclick="choose('Well... I guess you\'re my main dish. ❤️')">😊 You</button>
+<button class="card" onclick="choose('Your cooking','THE BEST CHOICE. 👨‍🍳❤️')">🍳 Your cooking</button>
+<button class="card" onclick="choose('Japanese','Lets do it! Some sake afterwards? 🍶')">🍣 Japanese</button>
+<button class="card" onclick="choose('Thai','Never thought you\'d pick this. 🌶')">🌶 Thai</button>
+<button class="card" onclick="choose('Western','Lets gooo! We haven\'t really had proper Western yet. 🍔')">🍔 Western</button>
+<button class="card" onclick="choose('Chicken Rice','Can\'t go wrong with comfort food. 😌')">🍗 Chicken Rice</button>
+<button class="card" onclick="choose('HDL','YAYYY GOOD CHOICE! 🎉<br><br>We\'ll complain about how full we are afterwards 😂')">🍲 HDL</button>
+<button class="card" onclick="choose('You','Well... I guess you\'re my main dish. ❤️')">😊 You</button>
 </div>
 </section>
 
@@ -54,6 +55,7 @@ button:hover,.card:hover{transform:translateY(-3px);box-shadow:0 0 25px rgba(244
 <div id="responseText" class="response"></div>
 <button class="lock-btn" onclick="confirmDate()">Lock it in ✅</button>
 <button class="back-btn" onclick="showMenu()">Try another option</button>
+<p class="small-note" id="saveStatus"></p>
 </section>
 
 <section id="final" class="screen">
@@ -63,13 +65,39 @@ button:hover,.card:hover{transform:translateY(-3px);box-shadow:0 0 25px rgba(244
 </section>
 
 <script>
+let selectedFood = "";
+
 function switchScreen(id){
-document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-document.getElementById(id).classList.add('active');
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
 }
-function showMenu(){switchScreen('menu');}
-function choose(r){document.getElementById('responseText').innerHTML=r;switchScreen('result');}
-function confirmDate(){switchScreen('final');}
+
+function showMenu(){
+  document.getElementById('saveStatus').textContent = "";
+  switchScreen('menu');
+}
+
+function choose(food, response){
+  selectedFood = food;
+  document.getElementById('responseText').innerHTML = response;
+  switchScreen('result');
+}
+
+function submitResponse(){
+  const formData = new FormData();
+  formData.append("entry.241731394", selectedFood);
+
+  fetch("https://docs.google.com/forms/d/e/1FAIpQLScdxbgmB423wFdzlqV65sKu40q2QL3K4LsvV2XVgbRbmjsgAw/formResponse", {
+    method: "POST",
+    mode: "no-cors",
+    body: formData
+  });
+}
+
+function confirmDate(){
+  submitResponse();
+  switchScreen('final');
+}
 </script>
 </body>
 </html>
